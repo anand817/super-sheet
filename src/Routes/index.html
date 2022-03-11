@@ -1,0 +1,54 @@
+<html> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+      table, th, td {
+        border: 1px solid black;
+        border-radius: 10px;
+        }
+  </style>
+  <script src=
+  "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+</script>
+  <script>
+          $(document).ready(function () {
+        var json = [
+    {
+      "name": "Aman Pandey",
+      "enrollment_no": 20122004,
+      "github_username": "Aman-Pandey-afk"
+    },
+    {
+      "name": "Anand Kumar",
+      "enrollment_no": 20114009,
+      "github_username": "anand817"
+    },
+    {
+      "name": "Aditya Rajput",
+      "enrollment_no": 20117009,
+      "github_username": "BURG3R5"
+    }
+  ];
+        var tr;
+        for (var i = 0; i < json.length; i++) {
+            tr = $('<tr/>');
+            tr.append("<td>" + json[i].name + "</td>");
+            tr.append("<td>" + json[i].enrollment_no + "</td>");
+            tr.append("<td>" + json[i].github_username + "</td>");
+            $('table').append(tr);
+        }
+    });
+  </script>
+  <title>html form</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Enrollment_no</th>
+            <th>Github Username</th>
+        </tr>
+    </table>
+</body>
+</html>
