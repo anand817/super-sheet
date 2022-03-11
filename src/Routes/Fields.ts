@@ -1,5 +1,7 @@
+import express from 'express';
 import fs from 'fs';
-import Field from "../Models/Field";
+
+import Field from '../Models/Field';
 
 export default class Fields {
     /**
@@ -9,7 +11,7 @@ export default class Fields {
      * @param response HTTP Response
      * @param __
      */
-    static get(_, response, __) {
+    static get(_, response: express.Response, __) {
         response.end(
             fs.readFileSync(
                 'data/fields.json',
@@ -29,13 +31,13 @@ export default class Fields {
      * @param response HTTP Response
      * @param _
      */
-    static post(request, response, _) {
+    static post(request: express.Request, response: express.Response, _) {
         const fields = Fields.readFields();
         const newFields: Array<Field> = request.body.fields;
         for (let i = 0; i < newFields.length; i++) {
             const matchingIndex = fields.findIndex(
                 (field, _) =>
-                    field.slug == newFields[i].slug
+                    field.slug == newFields[i].slug,
             );
             if (matchingIndex !== -1) {
                 fields[matchingIndex] = newFields[i];
