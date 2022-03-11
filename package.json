@@ -1,5 +1,5 @@
 {
-  "name": "super-sheet",
+  "name": "super-sheets-backend",
   "version": "1.0.0",
   "description": "Give superpowers to your CSV file.",
   "main": "src/App.ts",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mdgspace/super-sheet.git"
+    "url": "git+https://github.com/mdgspace/super-sheets-backend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mdgspace/super-sheet/issues"
+    "url": "https://github.com/mdgspace/super-sheets-backend/issues"
   },
-  "homepage": "https://github.com/mdgspace/super-sheet#readme",
+  "homepage": "https://github.com/mdgspace/super-sheets-backend#readme",
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.1",
