@@ -1,5 +1,5 @@
 export default class Home {
   static get(request, response, _) {
-    response.end(JSON.stringify({greeting: 'Hello world!'}));
+    response.sendFile(__dirname+"/index.html")
   }
 }
