@@ -1,4 +1,5 @@
-node_modules
-lib
 .idea
+.env
 .vscode
+lib
+node_modules
