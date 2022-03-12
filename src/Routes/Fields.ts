@@ -1,7 +1,8 @@
 import express from 'express';
 import fs from 'fs';
 
-import Field from '../Models/Field';
+import {Field} from '../Models/Field';
+import {socFieldsDB} from "../DbManagers/FieldsDbManager";
 
 export default class Fields {
     /**
@@ -11,13 +12,9 @@ export default class Fields {
      * @param response HTTP Response
      * @param __
      */
-    static get(_, response: express.Response, __) {
-        response.end(
-            fs.readFileSync(
-                'data/fields.json',
-                'utf-8',
-            ),
-        );
+    static async get(_, response: express.Response, __) {
+        const result = await socFieldsDB.get();
+        response.end(JSON.stringify(result));
     }
 
     /**

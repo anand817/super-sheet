@@ -3,7 +3,6 @@ import csv from 'csv-parser';
 import fs from 'fs';
 import {Readable} from 'stream';
 
-import UserModel from '../Models/UserModel';
 import Buffer from 'buffer';
 
 export default class Upload {
@@ -19,7 +18,7 @@ export default class Upload {
     }
 
     private static parseCsv(buffer: Buffer): void {
-        const users: Array<UserModel> = [];
+        const users: Array<object> = [];
         Readable
             .from(buffer)
             .pipe(csv())
@@ -27,7 +26,7 @@ export default class Upload {
             .on(
                 'end',
                 () => {
-                    const tableData: { data: Array<UserModel> } = {data: users};
+                    const tableData: { data: Array<object> } = {data: users};
                     fs.writeFileSync('./data/table.json', JSON.stringify(tableData), 'utf-8');
                 },
             );
