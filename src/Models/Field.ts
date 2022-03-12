@@ -1,5 +1,5 @@
 export interface Field {
-    slug: string;
-    name: string;
-    type: string;
+    fieldSlug: string;
+    displayName: string;
+    type: object;
 }

@@ -1,5 +1,7 @@
 import express from 'express';
 import fieldsDBManagers from "../DBManagers/FieldsDBManager";
+import {Field} from "../Models/Field";
+import tableDBManagers from "../DBManagers/TableDBManager";
 
 export default class Fields {
     /**
@@ -19,19 +21,17 @@ export default class Fields {
      * Format of body:
      *
      * ```{
-     * "fieldSlug": string,
-     * displayName: string,
-     * type: {
-     *  "typeSlug": string,
-     *  ...customizations
-     *  }
+     *   "field": Field,
+     *   "defaultValue": any
      * }
      *
      * @param request HTTP Request
      * @param response HTTP Response
      */
     static async post(request: express.Request, response: express.Response) {
-        await fieldsDBManagers[request.params.project].add(request.body);
+        const field: Field = request.body.field;
+        await (fieldsDBManagers[request.params.project]).add(field);
+        await (tableDBManagers[request.params.project]).addField(field.fieldSlug, request.body.defaultValue);
         response.end();
     }
 }

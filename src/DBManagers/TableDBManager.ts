@@ -24,6 +24,10 @@ export class TableDBManager {
             {$set: document},
         );
     }
+
+    async addField(fieldSlug: string, defaultValue: any): Promise<void> {
+        await fields.updateMany({}, {$set: {[fieldSlug]: defaultValue}});
+    }
 }
 
 const tableDBManagers: Map<string, TableDBManager> = new Map();
