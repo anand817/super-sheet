@@ -6,7 +6,8 @@ import mongoose from 'mongoose';
 
 import Fields from './Routes/Fields';
 import Projects from './Routes/Projects';
-import {atlasUri, port} from "./Config";
+import {atlasUri, port} from './Config';
+import Table from './Routes/Table';
 
 const app = express();
 const storage: multer.StorageEngine = multer.memoryStorage();
@@ -22,11 +23,14 @@ mongoose.connect(atlasUri)
     .then(async client => {
         (<mongoose.Mongoose>global.mongooseClient) = client;
 
-        app.get('/fields', Fields.get);
-        app.post('/fields', Fields.post);
+        app.get('/fields/:project', Fields.get);
+        app.post('/fields/:project', Fields.post);
 
         app.get('/projects', Projects.get);
         app.post('/projects', uploader.single('csv'), Projects.post);
+
+        app.get('/table/:project', Table.get);
+        app.post('/table/:project/:id', Table.post);
 
         app.listen(port, () => {
             console.log(`Listening at http://localhost:${port}`);

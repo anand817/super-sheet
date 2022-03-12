@@ -2,17 +2,17 @@ import express from 'express';
 import fs from 'fs';
 
 import {Field} from '../Models/Field';
-import {socFieldsDB} from "../DbManagers/FieldsDbManager";
+import fieldsDBManagers from "../DbManagers/FieldsDBManager";
 
 export default class Fields {
     /**
      * Fetches all fields
      *
-     * @param _
+     * @param request HTTP Request
      * @param response HTTP Response
      */
-    static async get(_, response: express.Response) {
-        const result = await socFieldsDB.get();
+    static async get(request: express.Request, response: express.Response) {
+        const result = await fieldsDBManagers[request.params.project].get();
         response.end(JSON.stringify(result));
     }
 

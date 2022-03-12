@@ -4,12 +4,11 @@ import {Field} from "../Models/Field";
 
 let fields: mongodb.Collection;
 
-class FieldsDbManager {
-    // TODO(BURG3R5): Inject DB when navigate to table of a project
-    async inject(client: Mongoose, project: string) {
+export class FieldsDBManager {
+    constructor(client: Mongoose, project: string) {
         if (fields) return;
         try {
-            fields = await client.connection.db.collection<mongodb.Document>(`${project}.fields`);
+            fields = client.connection.db.collection<mongodb.Document>(`${project}.fields`);
         } catch (e) {
             console.error(`ERROR: Failed while connecting to ${project}:\n${e}`);
         }
@@ -20,4 +19,5 @@ class FieldsDbManager {
     }
 }
 
-export let socFieldsDB = new FieldsDbManager();
+const fieldsDBManagers: Map<string, FieldsDBManager> = new Map();
+export default fieldsDBManagers;
