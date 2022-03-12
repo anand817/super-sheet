@@ -10,9 +10,8 @@ export default class Fields {
      *
      * @param _
      * @param response HTTP Response
-     * @param __
      */
-    static async get(_, response: express.Response, __) {
+    static async get(_, response: express.Response) {
         const result = await socFieldsDB.get();
         response.end(JSON.stringify(result));
     }
@@ -26,9 +25,8 @@ export default class Fields {
      *
      * @param request HTTP Request
      * @param response HTTP Response
-     * @param _
      */
-    static post(request: express.Request, response: express.Response, _) {
+    static post(request: express.Request, response: express.Response) {
         const fields = Fields.readFields();
         const newFields: Array<Field> = request.body.fields;
         for (let i = 0; i < newFields.length; i++) {

@@ -5,6 +5,7 @@ import {Field} from "../Models/Field";
 let fields: mongodb.Collection;
 
 class FieldsDbManager {
+    // TODO(BURG3R5): Inject DB when navigate to table of a project
     async inject(client: Mongoose, project: string) {
         if (fields) return;
         try {

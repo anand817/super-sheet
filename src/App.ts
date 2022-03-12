@@ -5,9 +5,8 @@ import multer from 'multer';
 import mongoose from 'mongoose';
 
 import Fields from './Routes/Fields';
-import Upload from './Routes/Upload';
+import Projects from './Routes/Projects';
 import {atlasUri, port} from "./Config";
-import {socFieldsDB} from "./DbManagers/FieldsDbManager";
 
 const app = express();
 const storage: multer.StorageEngine = multer.memoryStorage();
@@ -21,11 +20,13 @@ mongoose.connect(atlasUri)
         process.exit(1)
     })
     .then(async client => {
-        await socFieldsDB.inject(client, 'soc');
+        (<mongoose.Mongoose>global.mongooseClient) = client;
 
         app.get('/fields', Fields.get);
         app.post('/fields', Fields.post);
-        app.post('/upload', uploader.single('csv'), Upload.post);
+
+        app.get('/projects', Projects.get);
+        app.post('/projects', uploader.single('csv'), Projects.post);
 
         app.listen(port, () => {
             console.log(`Listening at http://localhost:${port}`);
