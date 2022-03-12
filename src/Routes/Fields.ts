@@ -1,5 +1,8 @@
+import express from 'express';
 import fs from 'fs';
-import Field from "../Models/Field";
+
+import {Field} from '../Models/Field';
+import {socFieldsDB} from "../DbManagers/FieldsDbManager";
 
 export default class Fields {
     /**
@@ -7,15 +10,10 @@ export default class Fields {
      *
      * @param _
      * @param response HTTP Response
-     * @param __
      */
-    static get(_, response, __) {
-        response.end(
-            fs.readFileSync(
-                'data/fields.json',
-                'utf-8',
-            ),
-        );
+    static async get(_, response: express.Response) {
+        const result = await socFieldsDB.get();
+        response.end(JSON.stringify(result));
     }
 
     /**
@@ -27,15 +25,14 @@ export default class Fields {
      *
      * @param request HTTP Request
      * @param response HTTP Response
-     * @param _
      */
-    static post(request, response, _) {
+    static post(request: express.Request, response: express.Response) {
         const fields = Fields.readFields();
         const newFields: Array<Field> = request.body.fields;
         for (let i = 0; i < newFields.length; i++) {
             const matchingIndex = fields.findIndex(
                 (field, _) =>
-                    field.slug == newFields[i].slug
+                    field.slug == newFields[i].slug,
             );
             if (matchingIndex !== -1) {
                 fields[matchingIndex] = newFields[i];

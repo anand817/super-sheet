@@ -1,4 +1,4 @@
-export default class Field {
+export interface Field {
     slug: string;
     name: string;
     type: string;
