@@ -8,6 +8,7 @@ import Fields from './Routes/Fields';
 import Projects from './Routes/Projects';
 import {atlasUri, port} from './Config';
 import Table from './Routes/Table';
+import Types from './Routes/Types';
 
 const app = express();
 const storage: multer.StorageEngine = multer.memoryStorage();
@@ -22,6 +23,8 @@ mongoose.connect(atlasUri)
     })
     .then(async client => {
         (<mongoose.Mongoose>global.mongooseClient) = client;
+
+        app.get('/types', Types.get);
 
         app.get('/fields/:project', Fields.get);
         app.post('/fields/:project', Fields.post);
