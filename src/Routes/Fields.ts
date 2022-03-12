@@ -1,8 +1,5 @@
 import express from 'express';
-import fs from 'fs';
-
-import {Field} from '../Models/Field';
-import fieldsDBManagers from "../DbManagers/FieldsDBManager";
+import fieldsDBManagers from "../DBManagers/FieldsDBManager";
 
 export default class Fields {
     /**

@@ -1,6 +1,6 @@
 import express from 'express';
-import fieldsDBManagers, {FieldsDBManager} from "../DbManagers/FieldsDBManager";
-import tableDBManagers, {TableDBManager} from "../DbManagers/TableDBManager";
+import fieldsDBManagers, {FieldsDBManager} from "../DBManagers/FieldsDBManager";
+import tableDBManagers, {TableDBManager} from "../DBManagers/TableDBManager";
 
 export default class Table {
     /**
