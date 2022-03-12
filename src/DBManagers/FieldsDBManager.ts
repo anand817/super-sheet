@@ -14,6 +14,10 @@ export class FieldsDBManager {
         }
     }
 
+    async add(field: Field): Promise<void> {
+        await fields.insertOne(field);
+    }
+
     async get(): Promise<Array<Field>> {
         return await fields.find<mongodb.Document>({}).toArray() as Field[];
     }

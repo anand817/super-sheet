@@ -18,38 +18,20 @@ export default class Fields {
      *
      * Format of body:
      *
-     * `{"fields": Array<Field>}`
+     * ```{
+     * "fieldSlug": string,
+     * displayName: string,
+     * type: {
+     *  "typeSlug": string,
+     *  ...customizations
+     *  }
+     * }
      *
      * @param request HTTP Request
      * @param response HTTP Response
      */
-    static post(request: express.Request, response: express.Response) {
-        const fields = Fields.readFields();
-        const newFields: Array<Field> = request.body.fields;
-        for (let i = 0; i < newFields.length; i++) {
-            const matchingIndex = fields.findIndex(
-                (field, _) =>
-                    field.slug == newFields[i].slug,
-            );
-            if (matchingIndex !== -1) {
-                fields[matchingIndex] = newFields[i];
-            } else {
-                fields.push(newFields[i]);
-            }
-        }
-        Fields.writeFields(fields);
+    static async post(request: express.Request, response: express.Response) {
+        await fieldsDBManagers[request.params.project].add(request.body);
         response.end();
-    }
-
-    private static readFields(): Array<Field> {
-        const fields = fs.readFileSync('data/fields.json', 'utf-8');
-        return JSON.parse(fields).fields;
-    }
-
-    private static writeFields(fields: Array<Field>) {
-        fs.writeFileSync(
-            'data/fields.json',
-            JSON.stringify({fields: fields}),
-        );
     }
 }
