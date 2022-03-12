@@ -1,5 +1,5 @@
 const BooleanType = {
-    slug: "boolean",
+  slug: 'boolean',
 };
 
 export default BooleanType;
